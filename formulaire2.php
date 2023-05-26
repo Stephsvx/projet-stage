@@ -1,22 +1,17 @@
 <form action="co_utilisateur.php" method="POST">
-    <label for="nom">Nom :</label>
-    <input type="text" id="nom" name="nom" required>
-
-    <label for="prenom">Prénom :</label>
-    <input type="text" id="prenom" name="prenom" required>
-
+  
     <label for="email">Email :</label>
     <input type="email" id="email" name="email" required>
 
     <label for="motdepasse">Mot de passe :</label>
     <input type="password" id="motdepasse" name="motdepasse" required>
 
-    <input type="submit" name="submit" value="Inscription">
+    <input type="submit" name="submit" value="Se connecter">
 </form>
 
 <style>
 
-input[type="submit"][name="submit"][value="Inscription"] {
+input[type="submit"][name="submit"][value="Se connecter"] {
     background-color: #adf0d1;
     color: #00203f;
     border: 1px solid #adf0d1;
@@ -30,7 +25,7 @@ input[type="submit"][name="submit"][value="Inscription"] {
     transition: .2s ease-in;
 }
 
-input[type="submit"][name="submit"][value="Inscription"]:hover {
+input[type="submit"][name="submit"][value="Se connecter"]:hover {
     cursor: pointer;
     background-color: #00203f;
     color: #adf0d1;

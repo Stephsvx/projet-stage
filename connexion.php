@@ -1,4 +1,4 @@
-
+<?php include 'co_utilisateur.php';?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +21,7 @@
                         <a href="#"><i class="fab fa-google-plus-g" ></i></a>
                         <a href="#"><i class="fab fa-linkedin-in" ></i></a>
                     </div>
-                    <span>Utiliser compte gmail</span>
-                    <input type="text" placeholder="Nom">
-                    <input type="text" placeholder="Prenom">
-                    <input type="email" placeholder="Email">
-                    <input type="mot-de-passe" placeholder="Mot de passe">
-                    <button>Créer le compte</button>
+                    <?php include 'formulaire.php';?>
                 </form>
             </div>
             <div class="form-container login-container">
@@ -37,10 +32,7 @@
                         <a href="#"><i class="fab fa-google-plus-g" ></i></a>
                         <a href="#"><i class="fab fa-linkedin-in" ></i></a>
                     </div>
-                    <span>Je n'est pas de compte</span>
-                    <input type="email" placeholder="Email">
-                    <input type="mot-de-passe" placeholder="Mot de passe">
-                    <button>Se connecter</button>
+                    <?php include 'formulaire2.php';?>
                 </form>
             </div>
 
