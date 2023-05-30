@@ -1,4 +1,5 @@
-<?php include 'co_utilisateur.php';?>
+<?php include 'co_utilisateur.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,19 +22,27 @@
                         <a href="#"><i class="fab fa-google-plus-g" ></i></a>
                         <a href="#"><i class="fab fa-linkedin-in" ></i></a>
                     </div>
-                    <?php include 'formulaire.php';?>
+                    
                 </form>
             </div>
             <div class="form-container login-container">
-                <form action="#">
-                    <h1>Se connecter</h1>
-                    <div class="social-container">
-                        <a href="#"><i class="fab fa-facebook-f" ></i></a>
-                        <a href="#"><i class="fab fa-google-plus-g" ></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in" ></i></a>
-                    </div>
-                    <?php include 'formulaire2.php';?>
-                </form>
+                
+            <form action="co_utilisateur.php" method="POST">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="motdepasse">Mot de passe :</label>
+    <input type="password" id="motdepasse" name="motdepasse" required>
+
+    <input type="submit" name="submit" value="Inscription">
+</form>
+
             </div>
 
             <div class="overlay-container">

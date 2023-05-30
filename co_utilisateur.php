@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
     if ($conn->query($sql) === TRUE) {
         // Redirection vers la page d'accueil avec le nom de l'utilisateur
-        header("Location: page_acc.php?nom=$nom");
+        header("Location: header.php?nom=$nom");
         exit();
     } else {
         echo "Erreur lors de l'inscription : " . $conn->error;
