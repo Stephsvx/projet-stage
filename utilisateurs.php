@@ -142,8 +142,8 @@ grid-row-gap: 0px;
 
 /*utilisateurs*/
 .utilisateurs {
-  background: rgb(148,187,233);
-  background: radial-gradient(circle, rgba(148,187,233,1) 0%, rgba(182,238,174,1) 100%);
+  background: rgb(182,238,174);
+  background: linear-gradient(90deg, rgba(182,238,174,1) 0%, rgba(148,187,233,1) 100%);
 }
 .utilisateurs .people-list {
   width: 260px;
@@ -194,8 +194,8 @@ grid-row-gap: 0px;
 
 /*messagerie*/
 .messagerie {
-  background: rgb(182,238,174);
-  background: radial-gradient(circle, rgba(182,238,174,1) 0%, rgba(148,187,233,1) 100%);
+  background: rgb(148,187,233);
+  background: linear-gradient(90deg, rgba(148,187,233,1) 0%, rgba(182,238,174,1) 100%);
 }
 .messagerie .chat-history {
   overflow-y: scroll;
