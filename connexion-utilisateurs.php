@@ -1,6 +1,17 @@
 <?php
-// Vérifier si le formulaire de connexion est soumis
-if (isset($_POST['login'])) {
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+
+if (isset($_POST['submit'])) { 
+
+    ////////////////////////////////////////////////////////////////////////////////////
+
+// l'erreur était la le submit été pas rappler aux niveaux du isset donc il pouvait pas verifier si vide 
+// c'est le submit que tu recupere dans ton formulaire
+
+////////////////////////////////////////////////////////////////////////////////////////
+
     // Récupérer les données du formulaire
     $email = $_POST['email'];
     $motdepasse = $_POST['motdepasse'];
@@ -23,25 +34,30 @@ if (isset($_POST['login'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
-        // Utilisateur trouvé, vérification du mot de passe
         $row = $result->fetch_assoc();
         if (password_verify($motdepasse, $row['motdepasse'])) {
-            // Mot de passe correct, connecter l'utilisateur
-            // Vous pouvez ajouter les actions nécessaires ici, par exemple définir des variables de session, etc.
             echo "Connexion réussie !";
+            $conn->close();
+
+            /////////////////////////////////////////////////////////////////////////////////////////
+
+            // le echo blocker ici sur le header quand on fait la location il faut pas de echo ou html sans close mais sa je rexpliquerais 
+
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            
             header("Location: index.php");
             exit();
         } else {
-            // Mot de passe incorrect
+           
             echo "Mot de passe incorrect.";
         }
     } else {
-        // Utilisateur non trouvé
+       
         echo "Utilisateur non trouvé.";
     }
 
-    // Fermeture de la connexion à la base de données
     $conn->close();
 }
 ?>
+
 
