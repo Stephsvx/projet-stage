@@ -19,15 +19,26 @@
 CREATE DATABASE IF NOT EXISTS `liteechat` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `liteechat`;
 
--- Listage de la structure de table liteechat. utilisateurs
-CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `id` int NOT NULL,
-  `nom` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `prenom` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `motdepasse` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+-- Listage de la structure de table liteechat. messages
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id-expediteur` varchar(60) NOT NULL DEFAULT '0',
+  `id-destinataire` varchar(60) NOT NULL DEFAULT '0',
+  `message` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
+-- Listage de la structure de table liteechat. utilisateurs
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) DEFAULT '0',
+  `prenom` varchar(50) DEFAULT '0',
+  `email` varchar(50) DEFAULT '0',
+  `motdepasse` varchar(60) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
