@@ -25,6 +25,15 @@ if (isset($_POST['submit'])) {
 
     if ($conn->query($sql) === TRUE) {
         // Redirection vers la page d'accueil avec le nom de l'utilisateur
+        session_start();
+        session_start();
+        $_SESSION['utilisateur_connecte'] = [
+            'id' => $conn->insert_id,
+            'prenom' => $prenom,
+            'nom' => $nom,
+            'email' => $email
+        ];
+        
         header("Location: index.php?nom=$nom");
         exit();
     } else {

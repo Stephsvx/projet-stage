@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
 
 if (isset($_POST['submit'])) { 
 
@@ -37,6 +38,13 @@ if (isset($_POST['submit'])) {
         $row = $result->fetch_assoc();
         if (password_verify($motdepasse, $row['motdepasse'])) {
             echo "Connexion réussie !";
+            $_SESSION['utilisateur_connecte'] = array(
+                'id' => $row['id'],
+                'prenom' => $row['prenom'],
+                'nom' => $row['nom'],
+                'email' => $row['email']
+            );
+            $_SESSION['prenom'] = $row['prenom'];
             $conn->close();
 
             /////////////////////////////////////////////////////////////////////////////////////////

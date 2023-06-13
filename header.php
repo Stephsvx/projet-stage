@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+$prenom = isset($_SESSION['prenom']) ? $_SESSION['prenom'] : '';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,26 +16,29 @@
 <body>
     
 <div class="parent">
-    <div class="header"> </div>
+    <div class="header"> 
+     <!-- <div class="account-icon"></div>
+      <div class="account-info"></div>-->
+    </div>
     <div class="logo"><a href="index.php"><img src="photos/logo.png" alt=""></a>
     </div>
 
     <div class="titre">Litee Chat </div>
     <div class="boutons"> 
-    <button class="reglages">
+          <button class="reglages">
             <i class="fas fa-gear"></i>
             reglages
           </button>
           
           <button class="compte">
             <i class="fas fa-user"></i>
-            Compte
+            <?php echo $prenom; ?>
           </button>
 
-          <button class="deconnexion">
-          <i class="fa-solid fa-power-off"></i>
-            Deconnexion
-          </button>
+          <a href="deconnexion.php" class="deconnexion">
+            <i class="fa-solid fa-power-off"></i>
+              Deconnexion
+          </a>
     </div>
 </div>
 
@@ -41,7 +47,7 @@
      // Récupérer les références des boutons
   var reglagesButton = document.querySelector('.reglages');
   var compteButton = document.querySelector('.compte');
-  var deconnexionButton = document.querySelector('.deconnexion');
+  
 
   // Ajouter un gestionnaire d'événements de clic au bouton "Réglages"
   reglagesButton.addEventListener('click', function() {
@@ -52,10 +58,7 @@
   compteButton.addEventListener('click', function() {
     window.location.href = 'connexion.php';
   });
-  // Ajouter un gestionnaire d'événements de clic au bouton "Compte"
-  deconnexionButton.addEventListener('click', function() {
-    window.location.href = 'connexion.php';
-  });
+ 
 </script>
 </html>
 

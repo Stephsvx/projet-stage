@@ -44,8 +44,8 @@ grid-row-gap: 0px;
 .logo2 { grid-area: 1 / 5 / 2 / 6; }
 
 .footer {
-    background: rgb(148,187,233);
-    background: radial-gradient(circle, rgba(148,187,233,1) 0%, rgba(238,174,202,1) 100%);
+    background: rgb(238,174,202);
+    background: linear-gradient(180deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     width: 100%;
     height: 135px;
     display: flex;

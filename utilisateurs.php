@@ -7,6 +7,29 @@
     <title>Litee Chat</title>
 </head>
 <body>
+
+<?php
+
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['utilisateur_connecte'])) {
+    $utilisateurConnecte = $_SESSION['utilisateur_connecte'];
+
+    // Récupérer les informations des autres utilisateurs connectés depuis le backend
+    $connexion = mysqli_connect('localhost', 'root', '', 'liteechat');
+    $query = "SELECT * FROM utilisateurs WHERE id <> " . $utilisateurConnecte['id'];
+    $result = mysqli_query($connexion, $query);
+
+    // Vérifier si la requête a réussi et renvoie des résultats
+    if ($result) {
+        $autresUtilisateursConnectes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } else {
+        $autresUtilisateursConnectes = array(); // Valeur par défaut, un tableau vide
+    }
+} else {
+    // L'utilisateur n'est pas connecté, faites quelque chose (redirection, affichage d'un message, etc.)
+}
+?>
+
 <div class="parent3">
     <div class="contenu"> </div>
     <div class="utilisateurs"> 
@@ -15,90 +38,21 @@
                 <input type="text" placeholder="search" />
                 <i class="fa fa-search"></i>
             </div>
-    <ul class="list">
-        <li class="clearfix">
-        <img src="photos/john.png" alt="avatar" />
-        <div class="about">
-            <div class="name">John Doe</div>
-            <div class="status">
-                <i class="fa fa-circle online"></i> Was that designed by you?+
-            </div>
-        </div>
-        </li>
+            <ul id="users">
+            <?php if (!empty($autresUtilisateursConnectes)) { ?>
+                  <ul id="users">
+            <?php foreach ($autresUtilisateursConnectes as $utilisateur) { ?>
+            <li><?php echo $utilisateur['prenom'] . ' ' . $utilisateur['nom']; ?></li>
+            <?php } ?>
+                    </ul>
+              <?php } else { ?>
+                <p>Aucun autre utilisateur connecté.</p>
+              <?php } ?>
+            
+            </ul>
 
-        <li class="clearfix">
-        <img src="photos/aitana.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Aitana Sainz</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/hugo.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Hugo Alias</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/bell.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Bell Barrier</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/jessica.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Jessica Doe</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/paul.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Pau Harris</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/jordi.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Jordi Basté</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-
-        <li class="clearfix">
-        <img src="photos/marc.png" alt="avatar" />
-        <div class="about">
-            <div class="name">Marc Sagalés</div>
-            <div class="status">
-                <i class="fa fa-circle offline"></i> last seen 2 hours ago
-            </div>
-        </div>
-        </li>
-    </ul>
-
-</div>
-</div>
+    </div>
+    </div>
     <div class="messagerie"> 
         <div class="chat">
             <div class="chat-history">
@@ -107,10 +61,17 @@
             <div class="chat-message clearfix"></div>
         </div>
     </div>
-    <div class="barre-envoie"><textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3"></textarea></div>
-    <div class="envoyer"><button id="btn-send">envoyer</button> </div>
+    <div class="barre-envoie">
+      <form id="message-form" action="envoyer_message.php" method="POST">
+        <input type="hidden" name="destinataire" id="destinataire" value="">
+        <textarea name="message-to-send" id="message-to-send" placeholder="Tapez votre message"></textarea>
+        <button type="submit" id="btn-send">Envoyer</button>
+      </form>
+    </div>
     
 </div> 
+
+
 
 <script src="script.js"></script>   
 </body>
@@ -127,16 +88,16 @@
 .parent3 {
 display: grid;
 grid-template-columns: repeat(5, 1fr);
-grid-template-rows: repeat(12, 1fr);
+grid-template-rows: repeat(5, 1fr);
 grid-column-gap: 0px;
 grid-row-gap: 0px;
 }
 
-.contenue { grid-area: 1 / 1 / 13 / 6; }
-.utilisateurs { grid-area: 1 / 1 / 13 / 2; }
-.messagerie { grid-area: 1 / 2 / 13 / 6; }
-.barre-envoie { grid-area: 12 / 2 / 13 / 5; }
-.envoyer { grid-area: 12 / 5 / 13 / 6; }
+.contenue { grid-area: 1 / 1 / 6 / 6; }
+.utilisateurs { grid-area: 1 / 1 / 6 / 2; }
+.messagerie { grid-area: 1 / 2 / 6 / 6; }
+.barre-envoie { grid-area: 5 / 2 / 6 / 5; }
+.envoyer { grid-area: 5 / 5 / 6 / 6; }
 
 
 
@@ -243,7 +204,12 @@ grid-row-gap: 0px;
     align-items:last baseline ;
 }
 
-.barre-envoie textarea {
+#message-form {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#message-to-send {
   width: 100%;
   border: none;
   padding: 10px 20px;
@@ -252,25 +218,28 @@ grid-row-gap: 0px;
   border-radius: 5px;
   resize: none;
   background-color: #eaecf0;
- 
 }
 
 .envoyer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  margin-top: 10px;
 }
+
 .envoyer button {
-  float: right;
-  color: rgb(87, 87, 240);
+  color: #5757f0;
   font-size: 16px;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  background: none;
+  padding: 5px 10px;
 }
+
 .envoyer button:hover {
-  color: black;
+  color: #000;
 }
 
 /*fin messagerie*/
